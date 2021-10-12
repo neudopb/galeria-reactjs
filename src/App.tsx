@@ -38,6 +38,11 @@ const App = () => {
 
   }
 
+  const handleDeleteClick = async (name: string) => {
+    await Photos.deletePhoto(name);
+    getPhotos();
+  }
+
   useEffect(() => {
     getPhotos();
   }, []);
@@ -64,7 +69,12 @@ const App = () => {
         {!loading && photos.length > 0 &&
           <C.PhotoList>
             {photos.map((item, index) => (
-              <PhotoItem key={index} name={item.name} url={item.url} />
+              <PhotoItem 
+                key={index} 
+                name={item.name} 
+                url={item.url} 
+                onDelete={handleDeleteClick}
+              />
             ))}
           </C.PhotoList>
         }
